@@ -28,12 +28,17 @@ public class MeasurementsController {
     MeasurementDTOValidator validator;
 
     @GetMapping()
-    public List<MeasurementDTO> getMeasurements(){
+    public List<MeasurementDTO> getMeasurements() {
         return measurementsService
                 .findAll()
                 .stream()
                 .map(this::ConvertToMeasurementDTO)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/rainyDaysCount")
+    public Integer getRainyDaysCount(){
+        return measurementsService.getAllRainyDays().size();
     }
 
     @PostMapping("/add")
@@ -64,7 +69,7 @@ public class MeasurementsController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<MeasurementErrorResponse> handleException(MeasurementNotAddedException e){
+    private ResponseEntity<MeasurementErrorResponse> handleException(MeasurementNotAddedException e) {
         MeasurementErrorResponse response = new MeasurementErrorResponse(
                 e.getMessage(),
                 LocalDateTime.now());

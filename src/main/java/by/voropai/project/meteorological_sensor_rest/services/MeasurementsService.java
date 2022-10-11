@@ -8,9 +8,12 @@ import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @ToString
@@ -38,6 +41,16 @@ public class MeasurementsService {
 
     public List<Measurement> findAll() {
         return measurementsRepository.findAll();
+    }
+
+    public Set<LocalDate> getAllRainyDays() {
+        List<Measurement> measurements = measurementsRepository.findAll();
+        List<LocalDateTime> timeWithDate = measurements
+                .stream()
+                .filter(Measurement::isRaining)
+                .map(Measurement::getMeasurementTime)
+                .toList();
+        return timeWithDate.stream().map(LocalDateTime::toLocalDate).collect(Collectors.toSet());
     }
 }
 
