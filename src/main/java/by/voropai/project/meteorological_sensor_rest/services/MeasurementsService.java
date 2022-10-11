@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -33,6 +34,10 @@ public class MeasurementsService {
         Optional<Sensor> sensorInDB = sensorsRepository.findByName(sensor.getName());
         sensorInDB.ifPresent(value -> sensor.setId(value.getId()));
         measurement.setMeasurementTime(LocalDateTime.now());
+    }
+
+    public List<Measurement> findAll() {
+        return measurementsRepository.findAll();
     }
 }
 

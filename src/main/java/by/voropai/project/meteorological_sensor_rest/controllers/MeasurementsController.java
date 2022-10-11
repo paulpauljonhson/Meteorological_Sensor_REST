@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -25,6 +26,15 @@ public class MeasurementsController {
     MeasurementsService measurementsService;
     ModelMapper modelMapper;
     MeasurementDTOValidator validator;
+
+    @GetMapping()
+    public List<MeasurementDTO> getMeasurements(){
+        return measurementsService
+                .findAll()
+                .stream()
+                .map(this::ConvertToMeasurementDTO)
+                .collect(Collectors.toList());
+    }
 
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO,
