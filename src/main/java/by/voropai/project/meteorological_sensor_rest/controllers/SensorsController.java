@@ -54,7 +54,7 @@ public class SensorsController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<SensorErrorResponse> handleException(SensorNotRegisteredException e){
+    private ResponseEntity<SensorErrorResponse> handleException(SensorNotRegisteredException e) {
         SensorErrorResponse response = new SensorErrorResponse(
                 e.getMessage(),
                 LocalDateTime.now());

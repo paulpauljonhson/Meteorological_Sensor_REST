@@ -55,7 +55,7 @@ public class MeasurementsController {
                     .append(";"));
             throw new MeasurementNotAddedException(errorMessage.toString());
         }
-        System.out.println(measurementDTO.getSensor());
+
         measurementsService.addNewMeasurement(ConvertToMeasurement(measurementDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
