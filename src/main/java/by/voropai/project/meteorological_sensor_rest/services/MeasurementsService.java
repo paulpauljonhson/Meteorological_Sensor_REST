@@ -47,7 +47,7 @@ public class MeasurementsService {
         List<Measurement> measurements = measurementsRepository.findAll();
         List<LocalDateTime> timeWithDate = measurements
                 .stream()
-                .filter(Measurement::isRaining)
+                .filter(Measurement::getRaining)
                 .map(Measurement::getMeasurementTime)
                 .toList();
         return timeWithDate.stream().map(LocalDateTime::toLocalDate).collect(Collectors.toSet());

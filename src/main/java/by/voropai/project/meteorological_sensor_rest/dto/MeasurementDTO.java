@@ -20,10 +20,10 @@ public class MeasurementDTO {
     @NotNull
     @Min(-100)
     @Max(100)
-    private double value;
+    private Double value;
 
     @NotNull
-    private boolean raining;
+    private Boolean raining;
 
     @NotNull
     private SensorDTO sensor;
